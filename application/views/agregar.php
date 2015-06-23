@@ -61,12 +61,13 @@
       <label for="titulo">Precio Total</label>
       <input type="text" size="20" name="total" id="precio_total"/>
       <br/>
-      <p><input type="submit" name="guardar" id="enviar" value="Agregar Producto" /></p>
+      <p><input type="submit" name="guardar" id="submit" value="Agregar Producto" /></p>
       
 
     </form>
 
-  
+ 
+
     <a href="home/logout">Salir</a>
   </body>
 </html>
