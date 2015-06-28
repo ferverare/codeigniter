@@ -10,31 +10,34 @@
 
     <h1>Agregar Productos</h1>
 
-    <form style="widch: 450px;"id="form" name="form" action="<?=base_url()?>index.php/home/guardar" method="POST">
+     <?= form_open(base_url().'index.php/home/validar',array('name'=>'mi_form','id'=>'form','method'=>'post'));?>
 
-      <label for="titulo">SKU</label>
-      <input type="text" size="20" name="sku" id="sku"/>
-      <br/>
-      <label for="titulo">Producto</label>
-      <input type="text" size="20" name="nombre" id="nombre"/>
-      <br/>
-      <label for="titulo">Descripción</label>
-      <input type="text" size="20" name="descripcion" id="descripcion"/>
-      <br/>
-      <label for="titulo">Cantidad</label>
-      <input type="text" size="20" name="cantidad" id="cantidad"/>
-      <br/>
-      <label for="titulo">Precio Individual</label>
-      <input type="text" size="20" name="individual" id="precio_individual"/>
-      <br/>
-      <label for="titulo">Precio Total</label>
-      <input type="text" size="20" name="total" id="precio_total"/>
-      <br/>
-      <p><input type="submit" name="guardar" id="submit" value="Agregar Producto" /></p>
       
+      <?= form_label('Sku','titulo', array('class'=>'label'));?>
+      <?= form_input('sku','','id="sku"');?>
+      <br/>
+      <?= form_label('Nombre','titulo', array('class'=>'label'));?>
+      <?= form_input('nombre','','id="nombre"');?>
+      <br/>
+      <?= form_label('Descripcion','titulo', array('class'=>'label'));?>
+      <?= form_input('descripcion','','id="descripcion"');?>
+      <br/>
+      <?= form_label('Cantidad','titulo', array('class'=>'label'));?>
+      <?= form_input('cantidad','','id="cantidad"');?>
+      <br/>
+      <?= form_label('Precio Individual','titulo', array('class'=>'label'));?>
+      <?= form_input('precio_individual','','id="precio_individual"');?>
+      <br/>
+      <?= form_label('Precio Total','titulo', array('class'=>'label'));?>
+      <?= form_input('precio_total','','id="precio_total"');?>
+      <br/>
+      <?= form_submit('submit','Enviar Datos','id="submit"');?>
 
-    </form>
 
+      
+    <?= form_close();?>
+    
+     <?php echo validation_errors(); ?>
  
 
     <a href="home/logout">Salir</a>

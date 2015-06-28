@@ -5,6 +5,9 @@ class Home extends CI_Controller {
   function __construct()
   {
     parent::__construct();
+    $this->load->helper('form');
+    $this->load->helper('url');
+    $this->load->library('form_validation');
 
   }
 
@@ -58,6 +61,24 @@ class Home extends CI_Controller {
 
   }
 
+  public function validar(){
+
+    $this->form_validation->set_rules('sku', 'Sku', 'required');
+    $this->form_validation->set_rules('nombre', 'Nombre', 'required');
+    $this->form_validation->set_rules('descripcion', 'Descripcion', 'required');
+    $this->form_validation->set_rules('cantidad', 'Cantidad', 'required');
+    $this->form_validation->set_rules('cantidad', 'Cantidad', 'required');
+    $this->form_validation->set_rules('precio_individual', 'Precio Individual', 'required');
+    $this->form_validation->set_rules('precio_total', 'Precio Total', 'required');
+
+    if ($this->form_validation->run() == FALSE)
+    {
+      $this->index();
+    }
+    else
+    {
+      $this->load->view('formsuccess');
+    }
 }
 
-?>
+}
