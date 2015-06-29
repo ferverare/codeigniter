@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-session_start(); //we need to call PHP's session object to access it through CI
+
 class Home extends CI_Controller {
 
   function __construct()
@@ -8,6 +8,7 @@ class Home extends CI_Controller {
     $this->load->helper('form');
     $this->load->helper('url');
     $this->load->library('form_validation');
+    $this->load->model('guardarModel');
 
   }
 
@@ -39,25 +40,36 @@ class Home extends CI_Controller {
   }
 
   public function agregar(){
-   $this->load->view("agregar");
+  $this->load->view("agregar");
 
   }
   public function guadar(){
+    
 
     $data = array(
 
-      'sku' => $this->input->post('sku',TRUE),
-      "nombre" => $this->input->post('nombre',TRUE),
-      "descripcion" => $this->input->post('descripcion',TRUE),
-      "cantidad" => $this->input->post('cantidad',TRUE),
-      "precio_individual" => $this->input->post('precio_individual',TRUE),
-      "precio_total" => $this->input->post('precio_total',TRUE)
+      'sku'               => $this->input->post('sku',TRUE),
+      'nombre'            => $this->input->post('nombre',TRUE),
+      'descripcion'       => $this->input->post('descripcion',TRUE),
+      'cantidad'          => $this->input->post('cantidad',TRUE),
+      'precio_individual' => $this->input->post('precio_individual',TRUE),
+      'precio_total'      => $this->input->post('precio_total',TRUE)
       
 
-    );
 
-    $this->guardar->guardar($data);
-    redirect('index.php/home/agregar');
+    );
+      if ($this->form_validation->run() == FALSE)
+          {
+            $this->index();
+          }
+          else
+          {
+            $this->load->view('formsuccess');
+          }
+
+
+          $this->guardarModel->guardar($data);
+          redirect('index.php/home/agregar');
 
   }
 
@@ -79,6 +91,17 @@ class Home extends CI_Controller {
     {
       $this->load->view('formsuccess');
     }
-}
+  }
+
+  public function ver(){    
+    $data = array(
+      'enlaces' => $this->guardarModel->verTodo(),
+      'dump'    => 0
+    );
+
+    
+    $this->load->view('ver', $data);
+   
+  }
 
 }

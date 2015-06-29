@@ -10,7 +10,9 @@
 
     <h1>Agregar Productos</h1>
 
-     <?= form_open(base_url().'index.php/home/validar',array('name'=>'mi_form','id'=>'form','method'=>'post'));?>
+   
+       
+  <?= form_open(base_url().'index.php/home/guardar',array('name'=>'mi_form','id'=>'form','method'=>'POST'));?>
 
       
       <?= form_label('Sku','titulo', array('class'=>'label'));?>
@@ -38,6 +40,7 @@
     <?= form_close();?>
     
      <?php echo validation_errors(); ?>
+     
  
 
     <a href="home/logout">Salir</a>
