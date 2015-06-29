@@ -1,16 +1,31 @@
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Productos</title>
-     <?=$this->load->view('header/style');?>
+    <title>Users Post</title>
+       <?=$this->load->view('header/style');?>
   </head>
   <body>
 
-  <?=$this->load->view('header/menu');?>
+  <form  role="form" id="form" name="form" action="<?=base_url()?>index.php/api/userPost" method="POST">
+        
+            <label for="nombre">Nombre</label>
+            <input type="text" id="username" name="username" >
+            <br/>
+            <label for="Contraseña">Contraseña</label>
+            <input type="password" id="password" name="password" >
+            <br/>
+            <label for="direccion">Direccion</label>
+            <input type="text" id="direccion" name="direccion" >
+            <br/>
 
-    <h1>Agregar Productos</h1>
+            <button type="submit" id="guardar" name="guardar">Guardar</button>              
+          
+        </form>
 
-  <form  role="form" id="form" name="form" action="<?=base_url()?>index.php/home/guardar" method="POST">
+  <h1>Agregar Productos</h1>
+
+  <form  role="form" id="form" name="form" action="<?=base_url()?>index.php/api/productoPost" method="POST">
         
             <label for="sku">Sku</label>
             <input type="text" id="sku" name="sku" placeholder="Sku producto">
@@ -35,9 +50,5 @@
             <button type="submit" id="guardar" name="guardar">Guardar</button>              
           
     </form>
-     
- 
-
-    <a href="home/logout">Salir</a>
   </body>
 </html>

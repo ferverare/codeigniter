@@ -8,7 +8,7 @@ class Home extends CI_Controller {
     $this->load->helper('form');
     $this->load->helper('url');
     $this->load->library('form_validation');
-    $this->load->model('guardarModel');
+    $this->load->model('guardarmodel');
 
   }
 
@@ -95,13 +95,18 @@ class Home extends CI_Controller {
 
   public function ver(){    
     $data = array(
-      'enlaces' => $this->guardarModel->verTodo(),
+      'enlaces' => $this->guardarmodel->vertodo(),
       'dump'    => 0
     );
 
     
     $this->load->view('ver', $data);
    
+  }
+
+  public function verdatos()[{
+    
+    
   }
 
 }
