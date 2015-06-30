@@ -79,6 +79,16 @@ class Api extends CI_Controller{
     
   }
 
+  public function test(){
+
+
+      
+      echo "parametro1"."<br/>";
+      echo $_GET = "parametro2"."<br/>";
+      echo $_GET = "parametro3";
+
+  }
+
 
 
 }

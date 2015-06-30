@@ -6,8 +6,9 @@
        <?=$this->load->view('header/style');?>
   </head>
   <body>
+  <h1>Agregar Usuarios</h1>
 
-  <form  role="form" id="form" name="form" action="<?=base_url()?>index.php/api/userPost" method="POST">
+  <form  style="width: 35%"role="form" id="form" name="form" action="<?=base_url()?>index.php/api/userPost" method="GET">
         
             <label for="nombre">Nombre</label>
             <input type="text" id="username" name="username" >
@@ -25,7 +26,7 @@
 
   <h1>Agregar Productos</h1>
 
-  <form  role="form" id="form" name="form" action="<?=base_url()?>index.php/api/productoPost" method="POST">
+  <form  style="width: 35%" role="form" id="form" name="form" action="<?=base_url()?>index.php/api/productoPost" method="POST">
         
             <label for="sku">Sku</label>
             <input type="text" id="sku" name="sku" placeholder="Sku producto">
