@@ -79,6 +79,55 @@ class Api extends CI_Controller{
     
   }
 
+    public function userGet(){
+
+    $data = array(
+
+      'username' => $this->input->get('username', TRUE),
+      'password' => md5($this->input->get('password',TRUE)),
+      'direccion'=> $this->input->get('direccion',TRUE),
+      'creacion' => date('Y/m/d h:m')
+
+    );
+     if ($this->form_validation->run() == FALSE)
+    {
+      $this->agregarUsuario();
+    }
+    else
+    {
+      $this->load->view('formsuccess');
+    }
+
+    $this->apimodel->userPost($data);
+
+
+  }
+  public function productoGet(){
+
+     $data = array(
+
+      'sku'               => $this->input->get('sku',TRUE),
+      'nombre'            => $this->input->get('nombre',TRUE),
+      'descripcion'       => $this->input->get('descripcion',TRUE),
+      'cantidad'          => $this->input->get('cantidad',TRUE),
+      'precio_individual' => $this->input->get('precio_individual',TRUE),
+      'precio_total'      => $this->input->get('precio_total',TRUE)
+      
+      );
+       if ($this->form_validation->run() == FALSE)
+    {
+      $this->agregarUsuario();
+    }
+    else
+    {
+      $this->load->view('formsuccess');
+    }
+
+    $this->apimodel->productoPost($data);
+
+    
+  }
+
   public function test(){
 
 

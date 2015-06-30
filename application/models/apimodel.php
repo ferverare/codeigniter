@@ -35,4 +35,14 @@ class Apimodel extends CI_Model{
 	$this->db->insert('productos', $data);
 
    }
+   public function userGet($data){
+    $this->db->insert('users', $data);
+
+
+   }
+
+   public function productoGet($data){
+  $this->db->insert('productos', $data);
+
+   }
 }
