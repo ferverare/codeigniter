@@ -45,4 +45,9 @@ class Apimodel extends CI_Model{
   $this->db->insert('productos', $data);
 
    }
+
+   public function userGetMobile($data){
+    $this->db->insert('users', $data);
+
+   }
 }

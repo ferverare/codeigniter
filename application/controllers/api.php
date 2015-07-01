@@ -25,10 +25,17 @@ class Api extends CI_Controller{
   	echo json_encode($resultado);
   }
 
-  public function agregarUsuario(){
-  	$this->load->view('api/api');
+  public function viewPost(){
+  	$this->load->view('api/view_post');
 
   }
+  public function viewGet(){
+    $this->load->view('api/view_get');
+
+  }
+
+
+
 //Agradando un usuario con el metodo POST
   public function userPost(){
 
@@ -42,7 +49,7 @@ class Api extends CI_Controller{
   	);
   	 if ($this->form_validation->run() == FALSE)
     {
-      $this->agregarUsuario();
+      $this->viewPost();
     }
     else
     {
@@ -51,7 +58,7 @@ class Api extends CI_Controller{
 
   	$this->apimodel->userPost($data);
 
-
+//Agregando productos con el metodo POST
   }
   public function productoPost(){
 
@@ -67,7 +74,7 @@ class Api extends CI_Controller{
       );
        if ($this->form_validation->run() == FALSE)
     {
-      $this->agregarUsuario();
+      $this->viewPost();
     }
     else
     {
@@ -78,6 +85,7 @@ class Api extends CI_Controller{
 
     
   }
+//Agregando usuarios con el metodo GET
 
     public function userGet(){
 
@@ -91,16 +99,16 @@ class Api extends CI_Controller{
     );
      if ($this->form_validation->run() == FALSE)
     {
-      $this->agregarUsuario();
+      $this->viewGet();
     }
     else
     {
       $this->load->view('formsuccess');
     }
 
-    $this->apimodel->userPost($data);
+    $this->apimodel->userGet($data);
 
-
+//Agregando productos con el metodo GET
   }
   public function productoGet(){
 
@@ -116,16 +124,50 @@ class Api extends CI_Controller{
       );
        if ($this->form_validation->run() == FALSE)
     {
-      $this->agregarUsuario();
+      $this->viewGEt();
     }
     else
     {
       $this->load->view('formsuccess');
     }
 
-    $this->apimodel->productoPost($data);
+    $this->apimodel->productoGet($data);
 
     
+  }
+
+  public function userGetMobile(){
+
+    
+
+        $this->form_validation->set_rules('username','Usuario','required');
+        $this->form_validation->set_rules('password','Contraseña','required');
+        $this->form_validation->set_rules('direccion','Direccion','required');
+        $this->form_validation->set_rules('creacion','Fecha de Creacion','required');
+
+        $this->form_validation->set_message('required', 'El %s es requerido');
+  
+       if ($this->form_validation->run() == FALSE)
+    {
+      echo "Error al añadir registro";
+    }
+    else
+    {
+      $data = array(
+
+      'username' => $this->input->get('username', TRUE),
+      'password' => md5($this->input->get('password',TRUE)),
+      'direccion'=> $this->input->get('direccion',TRUE),
+      'creacion' => date('Y/m/d h:m')
+
+      );
+
+      $this->apimodel->userGetMobile($data); 
+    }
+
+   
+
+
   }
 
   public function test(){
