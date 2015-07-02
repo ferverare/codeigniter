@@ -46,8 +46,18 @@ class Apimodel extends CI_Model{
 
    }
 
-   public function userGetMobile($data){
-    $this->db->insert('users', $data);
+   public function userGetMobile($username, $password, $direccion){
+
+      $data = array(
+
+          'username' => $username,
+          'password' => $password,
+          'direccion'=> $direccion
+
+        );
+
+
+    return $this->db->insert('users', $data);
 
    }
 }

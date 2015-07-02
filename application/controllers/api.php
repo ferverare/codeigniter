@@ -7,6 +7,7 @@ class Api extends CI_Controller{
   {
     parent::__construct();
     $this->load->helper('url');
+    $this->load->helper('form');
     $this->load->library('form_validation');
     $this->load->model('apimodel');
  
@@ -31,6 +32,10 @@ class Api extends CI_Controller{
   }
   public function viewGet(){
     $this->load->view('api/view_get');
+
+  }
+  public function viewGetMobile(){
+    $this->load->view('api/view_GetMobile');
 
   }
 
@@ -135,37 +140,69 @@ class Api extends CI_Controller{
 
     
   }
-
+/*
   public function userGetMobile(){
 
     
 
-        $this->form_validation->set_rules('username','Usuario','required');
-        $this->form_validation->set_rules('password','Contraseña','required');
-        $this->form_validation->set_rules('direccion','Direccion','required');
-        $this->form_validation->set_rules('creacion','Fecha de Creacion','required');
+        $this->form_validation->set_rules('username','Usuario','required|min_length[3]');
+        $this->form_validation->set_rules('password','Contraseña','required|min_length[3]');
+        $this->form_validation->set_rules('direccion','Direccion','required|min_length[3]');
+       
 
        
   
        if ($this->form_validation->run() == FALSE)
-    {
-      echo "Error al añadir registro";
-    }
-   else{
+        {
 
-        $insert = $this->input->post();
-        if($this->apimodel->userGetMobile($insert['username'],$insert['password'],$insert['direccion'], $insert['creacion'])){
+         $username = $this->input->get('username');
+         $password = $this->input->get('password');
+         $direccion = $this->input->get('direccion');
+         
+           
+         
+         $this->apimodel->userGetMobile($username, $password, $direccion);
+      
+       }
+       else
+       {
+
+       echo "Error al añadir registro";
+
+        } */
+           
+
+  public function userGetMobile(){
+
+
+        $this->form_validation->set_rules('username','Usuario','required|min_length[3]');
+        $this->form_validation->set_rules('password','Contraseña','required|min_length[3]');
+        $this->form_validation->set_rules('direccion','Direccion','required|min_length[3]');
+       
+
+       
+  
+       if ($this->form_validation->run() == FALSE)
+        {
+
+          echo "Error al añadir registro";
+         
+       }
+       else
+       {
+
+         $username = $this->input->post('username');
+         $password = $this->input->post('password');
+         $direccion = $this->input->post('direccion');
+          
+         $this->apimodel->userGetMobile($username, $password, $direccion);
+        
+         echo "El registro se añadio correctamente!!";
 
         }
-            
-        else{
-            $this->form_validation->set_message('username_check', 'The %s field can not be the word "test"');
-            
-        }
-   
-
+                     
+       
 
    } 
  }
 
-}
