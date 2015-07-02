@@ -145,41 +145,27 @@ class Api extends CI_Controller{
         $this->form_validation->set_rules('direccion','Direccion','required');
         $this->form_validation->set_rules('creacion','Fecha de Creacion','required');
 
-        $this->form_validation->set_message('required', 'El %s es requerido');
+       
   
        if ($this->form_validation->run() == FALSE)
     {
       echo "Error al añadir registro";
     }
-    else
-    {
-      $data = array(
+   else{
 
-      'username' => $this->input->get('username', TRUE),
-      'password' => md5($this->input->get('password',TRUE)),
-      'direccion'=> $this->input->get('direccion',TRUE),
-      'creacion' => date('Y/m/d h:m')
+        $insert = $this->input->post();
+        if($this->apimodel->userGetMobile($insert['username'],$insert['password'],$insert['direccion'], $insert['creacion'])){
 
-      );
-
-      $this->apimodel->userGetMobile($data); 
-    }
-
+        }
+            
+        else{
+            $this->form_validation->set_message('username_check', 'The %s field can not be the word "test"');
+            
+        }
    
 
 
-  }
-
-  public function test(){
-
-
-      
-      echo "parametro1"."<br/>";
-      echo $_GET = "parametro2"."<br/>";
-      echo $_GET = "parametro3";
-
-  }
-
-
+   } 
+ }
 
 }
