@@ -10,7 +10,7 @@
  <h1>Agregando registro utilizando Form Validation</h1>
  
 
-  <form  style="width: 80%"role="form" id="form" name="form" action="<?=base_url()?>index.php/api/userGetMobile" method="POST">
+  <form  style="width: 80%"role="form" id="form" name="form" action="<?=base_url()?>index.php/api/userBusqueda" method="POST">
         
             <label for="nombre">Nombre</label>
             <input type="text" id="username" name="username" >

@@ -175,34 +175,58 @@ class Api extends CI_Controller{
   public function userGetMobile(){
 
 
-        $this->form_validation->set_rules('username','Usuario','required|min_length[3]');
-        $this->form_validation->set_rules('password','Contraseña','required|min_length[3]');
-        $this->form_validation->set_rules('direccion','Direccion','required|min_length[3]');
-       
+    $this->form_validation->set_rules('username','Usuario','required|min_length[3]');
+    $this->form_validation->set_rules('password','Contraseña','required|min_length[3]');
+    $this->form_validation->set_rules('direccion','Direccion','required|min_length[3]');
+   
 
-       
-  
-       if ($this->form_validation->run() == FALSE)
-        {
+   
 
-          echo "Error al añadir registro";
-         
-       }
-       else
-       {
+   if ($this->form_validation->run() == FALSE)
+    {
 
-         $username = $this->input->post('username');
-         $password = $this->input->post('password');
-         $direccion = $this->input->post('direccion');
-          
-         $this->apimodel->userGetMobile($username, $password, $direccion);
-        
-         echo "El registro se añadio correctamente!!";
+      echo "Error al añadir registro";
+     
+   }
+   else
+   {
 
-        }
+     $username = $this->input->post('username');
+     $password = $this->input->post('password');
+     $direccion = $this->input->post('direccion');
+      
+     $this->apimodel->userGetMobile($username, $password, $direccion);
+    
+     echo "El registro se añadio correctamente!!";
+
+    }
+
+  }
                      
-       
+   public function userBusqueda(){
 
-   } 
- }
+    $this->form_validation->set_rules('username','Usuario','required|min_length[3]');
+    $this->form_validation->set_rules('password','Contraseña','required|min_length[3]'); 
 
+       if ($this->form_validation->run() == FALSE)
+    {
+
+      echo "Checa que los datos esten completos";
+     
+   }
+   else
+   {
+
+     $username = $this->input->post('username');
+     $password = $this->input->post('password');
+
+
+      $resultado = $this->apimodel->buscarUsuarios($username,$password);
+      echo json_encode($resultado);
+
+
+   }
+
+    
+}
+}

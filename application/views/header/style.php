@@ -17,8 +17,8 @@
     <script src="<?=base_url();?>js/foundation/foundation.alert.js"></script>
     <script src="<?=base_url();?>js/foundation/foundation.clearing.js"></script>
     <script src="<?=base_url();?>js/foundation/foundation.dropdow.js"></script>
-    <script src="http://localhost/codeigniter/js/foundation/foundation.equalizer.js"></script>
-    <script src="http://localhost/codeigniter/js/foundation/foundation.interchange.js"></script>
+    <script src="<?=base_url();?>js/foundation/foundation.equalizer.js"></script>
+    <script src="<?=base_url();?>js/foundation/foundation.interchange.js"></script>
     <script src="http://localhost/codeigniter/js/foundation/foundation.joyride.js"></script>
     <script src="http://localhost/codeigniter/js/foundation/foundation.js"></script>
     <script src="http://localhost/codeigniter/js/foundation/foundation.magellan.js"></script>

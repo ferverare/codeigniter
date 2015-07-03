@@ -60,4 +60,11 @@ class Apimodel extends CI_Model{
     return $this->db->insert('users', $data);
 
    }
+
+   public function buscarUsuarios($username, $password)
+    {
+       $myquery = $this->db->get_where('users', array('username'=>$username, 'password'=>$password));
+       $query = $myquery;
+       return $query->row();
+    }
 }
