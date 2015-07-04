@@ -46,7 +46,7 @@ class Apimodel extends CI_Model{
 
    }
 
-   public function userGetMobile($username, $password, $direccion){
+   public function insertarUsuario($username, $password, $direccion){
 
       $data = array(
 
@@ -61,7 +61,7 @@ class Apimodel extends CI_Model{
 
    }
 
-   public function buscarUsuarios($username, $password)
+   public function login($username, $password)
     {
        $myquery = $this->db->get_where('users', array
         (
@@ -97,7 +97,7 @@ class Apimodel extends CI_Model{
     public function eliminar($id)
     {
         $this->db->delete('users', array('id' => $id));
-        
+    
     }
 
      public function getUsuariosConProductos()
@@ -127,11 +127,19 @@ class Apimodel extends CI_Model{
         $this->db->insert("productos",$arreglo);
     }
 
-     public function modificar_usuario($datos=array(),$id)
+     public function modificar_usuario($id, $username, $password, $direccion)
     {
-        $this->db->where('id', $id);
-        $this->db->update('users', $datos); 
+          $data = array(
 
+          'id'       => $id,
+          'username' => $username,
+          'password' => $password,
+          'direccion'=> $direccion
+
+          );
+
+          $this->db->where('id',$id);
+          return $this->db->update('users', $data);
        
     }
 

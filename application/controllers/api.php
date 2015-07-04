@@ -172,7 +172,7 @@ class Api extends CI_Controller{
         } */
            
 
-  public function userGetMobile(){
+  public function insertarUsuario(){
 
 
     $this->form_validation->set_rules('username','Usuario','required|min_length[3]');
@@ -185,7 +185,7 @@ class Api extends CI_Controller{
    if ($this->form_validation->run() == FALSE)
     {
 
-      echo "Error al añadir registro";
+      echo "Error al añadir registro!!";
      
    }
    else
@@ -195,7 +195,8 @@ class Api extends CI_Controller{
      $password = md5($this->input->post('password'));
      $direccion = $this->input->post('direccion');
       
-     $this->apimodel->userGetMobile($username, $password, $direccion);
+     $this->apimodel->insertarUsuario($username, $password, $direccion);
+
     
      echo "El registro se añadio correctamente!!";
 
@@ -203,7 +204,7 @@ class Api extends CI_Controller{
 
   }
                      
-   public function userBusqueda(){
+   public function login(){
 
         $this->form_validation->set_rules('username','Usuario','required|min_length[3]');
         $this->form_validation->set_rules('password','Contraseña','required|min_length[3]'); 
@@ -221,7 +222,7 @@ class Api extends CI_Controller{
           $password = $this->input->get('password');
 
 
-          $resultado = $this->apimodel->buscarUsuarios($username,$password);
+          $resultado = $this->apimodel->login($username,$password);
           echo json_encode($resultado);
 
 
@@ -230,14 +231,37 @@ class Api extends CI_Controller{
 //CRUD
        }
 
-       public function usando_result_array()
+       public function getProductos()
         {
           
               $datos = $this->apimodel->getProductos();
               echo json_encode($datos);
         }
-      public function usando_where($id=null)
+
+      public function getProductosPorId($id=null)
+
         {
+
+              $this->form_validation->set_rules('id','id','required');
+            
+
+              if ($this->form_validation->run() == FALSE)
+              {
+
+                echo "Por favor ingrese un ID de pruducto";
+               
+             }
+             else
+             {
+
+                $id = $this->input->post('id');
+                $resultado = $this->apimodel->getProductosPorId($id);
+                echo json_encode($resultado);
+               
+
+
+             } 
+
           
               $datos=$this->apimodel->getProductosPorId($id);
               echo json_encode($datos);
@@ -245,7 +269,26 @@ class Api extends CI_Controller{
     
       public function eliminar()
         {
-            $this->apimodel->eliminar('20');
+              $this->form_validation->set_rules('id','id','required');
+            
+
+                 if ($this->form_validation->run() == FALSE)
+              {
+
+                echo "No se pudo eliminar el registro";
+               
+             }
+             else
+             {
+
+                $id = $this->input->post('id');
+                $resultado = $this->apimodel->eliminar($id);
+
+                echo "El registro se eliminó correctamente!!";
+
+
+             } 
+
             
         }
 
@@ -273,15 +316,34 @@ class Api extends CI_Controller{
 
     public function modificar()
     {
-        $datos=array
-        (
-            "username"=>"Esteban Reyes",
-            "password"=>"12345",
-            "direccion"=>"Nueva direccion de Esteban Reyes"
-        );
-       
-        $this->apimodel->modificar_usuario($datos,"21");
-        echo json_encode($datos);
+          $this->form_validation->set_rules('id','id','required'); 
+          $this->form_validation->set_rules('username','Usuario','required');
+          $this->form_validation->set_rules('password','Contraseña','required');
+          $this->form_validation->set_rules('direccion','Direccion','required');
+         
+
+         if ($this->form_validation->run() == FALSE)
+          {
+
+            echo "Error al modificar registro";
+           
+         }
+         else
+         {
+
+            $id        = $this->input->post("id");
+            $username  = $this->input->post("username");
+            $password  = $this->input->post("password");
+            $direccion = $this->input->post("direccion");
+            
+           $this->apimodel->modificar_usuario($id, $username, $password, $direccion);
+           
+           echo "El registro se modifico correctamente!!";
+
+        }
+ 
+           
+         
     }
     
 }
