@@ -205,28 +205,54 @@ class Api extends CI_Controller{
                      
    public function userBusqueda(){
 
-    $this->form_validation->set_rules('username','Usuario','required|min_length[3]');
-    $this->form_validation->set_rules('password','Contraseña','required|min_length[3]'); 
+        $this->form_validation->set_rules('username','Usuario','required|min_length[3]');
+        $this->form_validation->set_rules('password','Contraseña','required|min_length[3]'); 
 
-       if ($this->form_validation->run() == FALSE)
+           if ($this->form_validation->run() == FALSE)
+        {
+
+          echo "Checa que los datos esten completos";
+         
+       }
+       else
+       {
+
+          $username = $this->input->get('username');
+          $password = $this->input->get('password');
+
+
+          $resultado = $this->apimodel->buscarUsuarios($username,$password);
+          echo json_encode($resultado);
+
+
+       }
+
+//CRUD
+
+       public function usando_result_array()
     {
-
-      echo "Checa que los datos esten completos";
-     
-   }
-   else
-   {
-
-     $username = $this->input->post('username');
-     $password = $this->input->post('password');
-
-
-      $resultado = $this->apimodel->buscarUsuarios($username,$password);
-      echo json_encode($resultado);
-
-
-   }
+      
+          $datos=$this->apimodel->getProductos();
+          echo json_encode($datos);
+    }
+      public function usando_where($id=null)
+    {
+      
+          $datos=$this->apimodel->getProductosPorId($id);
+          echo json_encode($datos);
 
     
+      public function eliminar()
+      {
+          $this->apimodel->eliminar('3');
+          
+      }
+    
+    
 }
-}
+
+
+
+
+
+

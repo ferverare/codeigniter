@@ -63,8 +63,43 @@ class Apimodel extends CI_Model{
 
    public function buscarUsuarios($username, $password)
     {
-       $myquery = $this->db->get_where('users', array('username'=>$username, 'password'=>$password));
+       $myquery = $this->db->get_where('users', array
+        (
+          'username'=>$username, 
+          'password'=>$password
+          
+          ));
        $query = $myquery;
        return $query->row();
     }
+
+    public function getProductos()
+    {
+        $query=$this->db
+        ->select("id,sku,nombre,nombre,descripcion,cantidad,precio_individual,precio_total")
+        ->from("productos")
+        ->order_by("id","desc")
+        ->get();
+        return $query->result_array();
+    }
+    public function getProductosPorId($id)
+    {
+        $where=array("id"=>$id);
+        $query=$this->db
+        ->select("id,sku,nombre,nombre,descripcion,cantidad,precio_individual,precio_total")
+        ->from("productos")
+        ->where($where)
+        ->get();
+        return $query->row();
+    }
+  
+    
+    public function eliminar($id)
+    {
+        $this->db->delete('productos', array('id' => $id));
+        
+    }
+
+
+
 }
