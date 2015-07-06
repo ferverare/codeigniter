@@ -80,7 +80,7 @@ class Apimodel extends CI_Model{
         ->from("productos")
         ->order_by("id","desc")
         ->get();
-        return $query->result_array();
+        return $query->row();
     }
     public function getProductosPorId($id)
     {
@@ -96,10 +96,44 @@ class Apimodel extends CI_Model{
     
     public function eliminar($id)
     {
-        $this->db->delete('productos', array('id' => $id));
+        $this->db->delete('users', array('id' => $id));
         
     }
 
+     public function getUsuariosConProductos()
+    {
+ 
+        $query=$this->db
+        ->select("u.id as id,u.username,u.password,u.direccion,u.creacion")
+        ->from("users as u")
+        ->join("productos as p", "u.id = p.id","inner")
+        ->get();
+        return $query->result();
+    }
+
+      public function insertar_usuario($datos=array())
+    {
+        $this->db->insert("users",$datos);
+       
+        $arreglo=array
+        (
+            "sku"=>"56498",
+            "nombre"=>"Refresco",
+            "descripcion"=>"Refresco de sabor",
+            "cantidad"=>"100",
+            "precio_individual"=>"10",
+            "precio_total"=>"1000"
+        );
+        $this->db->insert("productos",$arreglo);
+    }
+
+     public function modificar_usuario($datos=array(),$id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('users', $datos); 
+
+       
+    }
 
 
 }

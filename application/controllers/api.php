@@ -192,7 +192,7 @@ class Api extends CI_Controller{
    {
 
      $username = $this->input->post('username');
-     $password = $this->input->post('password');
+     $password = md5($this->input->post('password'));
      $direccion = $this->input->post('direccion');
       
      $this->apimodel->userGetMobile($username, $password, $direccion);
@@ -228,31 +228,60 @@ class Api extends CI_Controller{
        }
 
 //CRUD
+       }
 
        public function usando_result_array()
-    {
-      
-          $datos=$this->apimodel->getProductos();
-          echo json_encode($datos);
-    }
+        {
+          
+              $datos = $this->apimodel->getProductos();
+              echo json_encode($datos);
+        }
       public function usando_where($id=null)
-    {
-      
-          $datos=$this->apimodel->getProductosPorId($id);
-          echo json_encode($datos);
-
+        {
+          
+              $datos=$this->apimodel->getProductosPorId($id);
+              echo json_encode($datos);
+        }
     
       public function eliminar()
-      {
-          $this->apimodel->eliminar('3');
+        {
+            $this->apimodel->eliminar('20');
+            
+        }
+
+        public function usando_join()
+        {
           
-      }
-    
+              $datos=$this->apimodel->getUsuariosConProductos();
+              echo json_encode($datos);
+        }
+
+         public function insertar()
+    {
+
+        
+        $datos=array
+        (
+            "username"=>"Esteban",
+            "password"=>"123",
+            "direccion"=>"direccion de esteban",
+            "creacion"=>date('Y/m/d h:m')
+        );
+        $this->apimodel->insertar_usuario($datos);
+        echo json_encode($datos);
+    }
+
+    public function modificar()
+    {
+        $datos=array
+        (
+            "username"=>"Esteban Reyes",
+            "password"=>"12345",
+            "direccion"=>"Nueva direccion de Esteban Reyes"
+        );
+       
+        $this->apimodel->modificar_usuario($datos,"21");
+        echo json_encode($datos);
+    }
     
 }
-
-
-
-
-
-
